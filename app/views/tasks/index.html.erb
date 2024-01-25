@@ -1,5 +1,12 @@
-<h1>My Tasks</h1>
+<div class="container">
+  <h1>My Tasks</h1>
 
-<% @tasks.each_with_index do |task, index| %>
-<%= "#{index + 1} - #{task.title}" %><br>
-<% end %>
+  <% @tasks.each_with_index do |task, index| %>
+  <%= check_box_tag 'completed', '1', task.completed, disabled: true %>
+  <%= label_tag 'completed', 'Completed' %>
+  <%= link_to task.title, task_path(task) %><%= link_to "Delete", task_path(task), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %><br>
+  <% end %>
+
+
+  <%= link_to "Create New Task", tasks_new_path %>
+</div>

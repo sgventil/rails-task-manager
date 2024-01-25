@@ -1,0 +1,8 @@
+<h3><%= @task.title %></h3>
+<p><%= @task.details %></p>
+<p>
+  <%= check_box_tag 'completed', '1', @task.completed, disabled: true %>
+  <%= label_tag 'completed', 'Completed' %>
+</p>
+
+<%= link_to "Edit Task", tasks_edit_path %>
