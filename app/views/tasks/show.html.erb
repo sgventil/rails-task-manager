@@ -1,8 +1,21 @@
-<h3><%= @task.title %></h3>
-<p><%= @task.details %></p>
-<p>
-  <%= check_box_tag 'completed', '1', @task.completed, disabled: true %>
-  <%= label_tag 'completed', 'Completed' %>
-</p>
+<div class="container mt-5">
 
-<%= link_to "Edit Task", tasks_edit_path %>
+  <ul>
+    <li>
+      <h2><%= @task.title %></h2>
+    </li>
+    <li>
+      <h6><%= @task.details %></h6>
+    </li>
+    <li>
+      <% if @task.completed? %>
+        <i class="fa-regular fa-square-check"></i> Task Completed!
+      <% else %>
+        <i class="fa-regular fa-square"></i> This task is not completed yet!
+      <% end %><br>
+    </li>
+  </ul>
+
+  <%= link_to "Edit Task", tasks_edit_path %>
+  <%= link_to "Back to Tasks", tasks_path %>
+</div>

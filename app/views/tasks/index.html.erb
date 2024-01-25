@@ -1,12 +1,23 @@
-<div class="container">
+<div class="container mt-5">
   <h1>My Tasks</h1>
 
-  <% @tasks.each_with_index do |task, index| %>
-  <%= check_box_tag 'completed', '1', task.completed, disabled: true %>
-  <%= label_tag 'completed', 'Completed' %>
-  <%= link_to task.title, task_path(task) %><%= link_to "Delete", task_path(task), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %><br>
+  <ul>
+    <% @tasks.each_with_index do |task, index| %>
+      <li>
+        <% if task.completed? %>
+          <i class="fa-regular fa-square-check"></i>
+        <% else %>
+          <i class="fa-regular fa-square"></i>
+        <% end %>
+        <%= link_to task.title, task_path(task), style: "text-decoration: none;" %>
+        <%= link_to task_path(task.id), data: {turbo_method: :delete, turbo_confirm: "Delete #{task.title}?"} do %>
+          <i class="fa-regular fa-trash-can"></i>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= link_to tasks_new_path do %>
+    <i class="fa-solid fa-plus"></i> Add a new task
   <% end %>
-
-
-  <%= link_to "Create New Task", tasks_new_path %>
 </div>
